@@ -12,7 +12,8 @@ jej-mas is a general purpose bot, features a variety of fun and interactive comm
 1. [TheCatAPI](https://thecatapi.com/)
 2. [HTTPCat](https://http.cat/)
 3. [The Bored API](https://www.boredapi.com/)
-4. [Jikan API (4.0.0)](https://docs.api.jikan.moe/)
+4. ~[Jikan API (4.0.0)](https://docs.api.jikan.moe/)~
+4. [MyAnimeList API (beta ver)](https://myanimelist.net/apiconfig/references/api/v2#section/Versioning)
 5. [Inspiro Bot API](https://inspirobot.me/)
 6. [AdviceSlip API](https://api.adviceslip.com/)
 7. [Giphy API](https://developers.giphy.com/)
@@ -45,6 +46,7 @@ $ cd snowcodes2022
 Add your Bot Token and Giphy Api Token to the `config.py` file.
 ```python
 token = 'bot_token_here'
+mal_api_key = 'mal_client_id_here'
 giphy_api_key = 'giphy_api_token_here'
 ```
 Run the bot

@@ -1,15 +1,16 @@
 import discord
 import json
+import config
 from discord.ext import commands
 from discord.commands import Option
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 
 class AnimeManga(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     # Anime
-    @commands.slash_command()
+    @commands.slash_command(guild_ids = [697938708174733454])
     async def anime(
         self,
         ctx: discord.ApplicationContext,
@@ -19,29 +20,46 @@ class AnimeManga(commands.Cog):
 
         title = '-'.join(title.split(' '))
         
-        url = f'https://api.jikan.moe/v4/anime?q={title}'
+        # Search the anime and get its id.
+        search_url = f'https://api.myanimelist.net/v2/anime?q={title}'
+        result = urlopen(Request(search_url, headers={'X-MAL-CLIENT-ID': config.mal_api_key}))
+        
+        anime_id = json.loads(result.read().decode('utf-8'))['data'][0]['node']['id']
 
-        r = urlopen(url)
-
-        anim = json.loads(r.read().decode('utf-8'))['data'][0]
+        # Get anime details by id
+        url = f'https://api.myanimelist.net/v2/anime/{anime_id}?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_episodes,start_season,broadcast,source,average_episode_duration,rating,pictures,background,related_anime,related_manga,recommendations,studios,statistics'
+        
+        r = urlopen(Request(url, headers={'X-MAL-CLIENT-ID': config.mal_api_key}))  
+        anim = json.loads(r.read().decode('utf-8'))
 
         embed = discord.Embed(
-            title = f"{anim['titles'][0]['title']}",
-            url = f"{anim['url']}",
+            title = f"{anim['title']}",
+            url = f"https://myanimelist.net/anime/{anime_id}",
             colour = discord.Colour.random()
         )
 
-        embed.set_thumbnail(url=f"{anim['images']['jpg']['image_url']}")
+        embed.set_thumbnail(url=f"{anim['main_picture']['medium']}")
 
-        if len(anim['synopsis']) > 1024:
-            embed.add_field(name='Description', value=f"{anim['synopsis'][:1020]}...", inline=False)
-        else:
-            embed.add_field(name='Description', value=anim['synopsis'], inline=False)
+        syn = list(filter(None, anim['synopsis'].split('\n')))
 
-        embed.add_field(name='Episodes', value=anim['episodes'], inline=True)
-        embed.add_field(name='Duration', value=anim['duration'], inline=True)
-        embed.add_field(name='Status', value=anim['status'], inline=True)
+        embed.add_field(name='Description', value=syn[0], inline=False)
+        
+        for i in range(1, len(syn)):
+            embed.add_field(name='\u200b', value=syn[i], inline=False)
 
+        if anim['media_type'] == 'tv':
+            embed.add_field(name='Episodes', value=anim['num_episodes'], inline=True)
+            embed.add_field(name='Duration', value=f"{anim['average_episode_duration']//60} min", inline=True)
+            embed.add_field(name='Status', value=" ".join(anim['status'].split('_')).capitalize(), inline=True)
+            embed.add_field(name='Broadcast', value=f"{anim['broadcast']['day_of_the_week'].capitalize()}, {anim['broadcast']['start_time']}", inline=True)
+        
+        elif anim['media_type'] == 'movie':
+            embed.add_field(name='Duration', value=f"{anim['average_episode_duration']//60} min", inline=True)
+            embed.add_field(name='Status', value=" ".join(anim['status'].split('_')).capitalize(), inline=True)   
+        
+        embed.add_field(name='Started Airing at:', value=anim['created_at'][:10], inline=True)
+        embed.add_field(name='Finished Airing at:', value=anim['end_date'], inline=True)
+       
         genres = []
         for i in range(0, len(anim['genres'])):
             genres.append(anim['genres'][i]['name'])
@@ -75,31 +93,37 @@ class AnimeManga(commands.Cog):
         '''Manga Search'''
 
         title = '-'.join(title.split(' '))
+
+        # Search the manga and get its id.
+        search_url = f'https://api.myanimelist.net/v2/manga?q={title}'
+        result = urlopen(Request(search_url, headers={'X-MAL-CLIENT-ID': config.mal_api_key}))
         
-        url = f'https://api.jikan.moe/v4/manga?q={title}'
+        manga_id = json.loads(result.read().decode('utf-8'))['data'][0]['node']['id']
+            
+        # Get manga details by id
+        url = f'https://api.myanimelist.net/v2/manga/{manga_id}?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_volumes,num_chapters,pictures,background,related_anime,related_manga,recommendations'
+        
+        r = urlopen(Request(url, headers={'X-MAL-CLIENT-ID': config.mal_api_key}))  
+        mang = json.loads(r.read().decode('utf-8'))
 
-        r = urlopen(url)
-
-        mang = json.loads(r.read().decode('utf-8'))['data'][0]
 
         embed = discord.Embed(
-            title = f"{mang['titles'][0]['title']}",
-            url = f"{mang['url']}",
+            title = f"{mang['title']}",
+            url = f"https://myanimelist.net/manga/{manga_id}",
             colour = discord.Colour.random()
         )
 
-        embed.set_thumbnail(url=f"{mang['images']['jpg']['image_url']}")
+        embed.set_thumbnail(url=f"{mang['main_picture']['medium']}")
 
-        embed.add_field(name='Type', value=mang['type'], inline=True)
+        syn = list(filter(None, mang['synopsis'].split('\n')))
+        embed.add_field(name='Description', value=syn[0], inline=False)
+        
+        for i in range(1, len(syn)):
+            embed.add_field(name='\u200b', value=syn[i], inline=False)
 
-        if len(mang['synopsis']) > 1024:
-            embed.add_field(name='Description', value=f"{mang['synopsis'][:1020]}...", inline=False)
-        else:
-            embed.add_field(name='Description', value=mang['synopsis'], inline=False)
-
-        embed.add_field(name='Volumes', value=mang['volumes'], inline=True)
-        embed.add_field(name='Chapters', value=mang['chapters'], inline=True)
-        embed.add_field(name='Status', value=mang['status'], inline=True)
+        embed.add_field(name='Volumes', value=mang['num_volumes'], inline=True)
+        embed.add_field(name='Chapters', value=mang['num_chapters'], inline=True)
+        embed.add_field(name='Status', value=" ".join(mang['status'].split('_')).capitalize(), inline=True)  
 
         genres = []
         for i in range(0, len(mang['genres'])):
