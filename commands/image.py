@@ -145,12 +145,28 @@ class Image(commands.Cog, description="Image Commands"):
 
             await ctx.edit(content=None, file=file, embed=embed)    
 
+        # Both are none
         else:
-            embed = discord.Embed (
-                title = ':x: Please provide an image or a member!',
-                colour = discord.Colour.from_rgb(255, 0, 0)
-            )        
-            await ctx.respond(embed=embed)
+            member = ctx.author
+            
+            await member.avatar.save('assets/images/deepfry/avatar.png')
+            final('assets/images/deepfry/avatar.png')            
+            
+            embed = discord.Embed(
+            title=f"{member.name} lookin' crispy!",
+            description=f"{ctx.author.name} has deepfried themselves!",
+            colour = discord.Colour.from_rgb(234, 70, 48)
+        )        
+        
+            file = discord.File('assets/images/deepfry/deepfried.png', filename='deepfried.png')
+            
+            await ctx.respond("Loading....")
+
+            embed.set_thumbnail(url="https://img-os-static.hoyolab.com/communityWeb/upload/159da7599d435a24ee228116adf80434.gif")
+            embed.set_image(url="attachment://deepfried.png")
+            embed.set_footer(text= self.footer)
+
+            await ctx.edit(content=None, file=file, embed=embed) 
 
 def setup(bot):
     bot.add_cog(Image(bot))
