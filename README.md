@@ -39,8 +39,8 @@ Can be obtained from https://developers.giphy.com/
 
 # Bot Setup
 ```bash
-$ git clone https://github.com/jej-v/idk
-$ cd idk
+$ git clone https://github.com/jej-v/snowcodes2022
+$ cd snowcodes2022
 ```
 Add your Bot Token and Giphy Api Token to the `config.py` file.
 ```python
