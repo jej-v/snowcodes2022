@@ -38,16 +38,18 @@ class AnimeManga(commands.Cog):
             url = f"https://myanimelist.net/anime/{anime_id}",
             colour = discord.Colour.random()
         )
-
+    
         embed.set_thumbnail(url=f"{anim['main_picture']['medium']}")
 
-        syn = list(filter(None, anim['synopsis'].split('\n')))
-
-        embed.add_field(name='Description', value=syn[0], inline=False)
+        if len(anim['synopsis']) > 1024:
+            syn = list(filter(None, anim['synopsis'].split('\n')))
+            embed.add_field(name='Description', value=syn[0], inline=False)
+            
+            for i in range(1, len(syn)):
+                embed.add_field(name='\u200b', value=syn[i], inline=False)
+        else:
+            embed.add_field(name='Description', value=anim['synopsis'], inline=False)
         
-        for i in range(1, len(syn)):
-            embed.add_field(name='\u200b', value=syn[i], inline=False)
-
         if anim['media_type'] == 'tv':
             embed.add_field(name='Episodes', value=anim['num_episodes'], inline=True)
             embed.add_field(name='Duration', value=f"{anim['average_episode_duration']//60} min", inline=True)
@@ -72,7 +74,6 @@ class AnimeManga(commands.Cog):
     # Catch Anime Error
     @anime.error
     async def anime_error(self,ctx,error):
-        print(error)
         if isinstance(error, discord.errors.ApplicationCommandInvokeError):
             embed = discord.Embed (
                 title = '404 - Anime Not Found',
@@ -138,7 +139,6 @@ class AnimeManga(commands.Cog):
     # Catch Manga Error
     @manga.error
     async def manga_error(self,ctx,error):
-        print(error)
         if isinstance(error, discord.errors.ApplicationCommandInvokeError):
             embed = discord.Embed (
                 title = '404 - Manga Not Found',
