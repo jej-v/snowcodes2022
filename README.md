@@ -38,6 +38,9 @@ If you're having trouble finding it, or don't know how to. Follow this [tutorial
 ## 2. Giphy API Key 
 Can be obtained from https://developers.giphy.com/
 
+## 3. MyAnimeList API Key
+Can be obtained from https://myanimelist.net/apiconfig
+
 # Bot Setup
 ```bash
 $ git clone https://github.com/jej-v/snowcodes2022
