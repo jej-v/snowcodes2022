@@ -1,6 +1,7 @@
 import discord
 import json
 import config
+import pprint
 from discord.ext import commands
 from discord.commands import Option
 from urllib.request import urlopen, Request
@@ -10,7 +11,7 @@ class AnimeManga(commands.Cog):
         self.bot = bot
 
     # Anime
-    @commands.slash_command(guild_ids = [697938708174733454])
+    @commands.slash_command()
     async def anime(
         self,
         ctx: discord.ApplicationContext,
@@ -71,6 +72,7 @@ class AnimeManga(commands.Cog):
     # Catch Anime Error
     @anime.error
     async def anime_error(self,ctx,error):
+        print(error)
         if isinstance(error, discord.errors.ApplicationCommandInvokeError):
             embed = discord.Embed (
                 title = '404 - Anime Not Found',
@@ -136,6 +138,7 @@ class AnimeManga(commands.Cog):
     # Catch Manga Error
     @manga.error
     async def manga_error(self,ctx,error):
+        print(error)
         if isinstance(error, discord.errors.ApplicationCommandInvokeError):
             embed = discord.Embed (
                 title = '404 - Manga Not Found',
