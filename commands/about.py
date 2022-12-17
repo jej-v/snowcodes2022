@@ -95,23 +95,24 @@ class About(commands.Cog, description="About commands."):
         embed.add_field(name="🗿 Standard Commands", value='''
     `/help` - This message.
     `/aboutme` - Information about me!
-    `/info` - Shows member information.''', inline=False)
+    `/info` - Shows member information.
+    `/leaderboard` - Shows the leaderboard of the most snowballs thrown.''', inline=False)
 
         embed.add_field(name='🖼️ Image Commands', value='''
     `/snowglobe` - Picture yourself inside a snowglobe!
-    `/yatta` - Get Yatta'd by the great Herrscher of Sentience
-    `/deepfry` - Deepfries an image or a member
+    `/yatta` - Get Yatta'd by the great Herrscher of Sentience.
+    `/deepfry` - Deepfries an image or a member.
     `/wishcard` - Create a card with your wishes in it!
     ''')
         embed.add_field(name="✨ Fun Commands", value='''
     `/snowball` - Throw a snowball at someone!
     `/countdown` - How many days left till Xmas?
-    `/cat` - cat
+    `/cat` - cat.
     `/advice` - Have a random slip of advice~
     `/bored` - Bored? This may help~
     `/inspiro` - Best Inspirational Quotes ever. Source: ||trust me bro||
-    `/anime` - Anime Search
-    `/manga` - Manga Search
+    `/anime` - Anime Search.
+    `/manga` - Manga Search.
     `/magic8ball` - Ask the magic ball~
     `/choose` - Let the bot decide for you.''',inline=False)
 
