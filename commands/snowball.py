@@ -61,7 +61,8 @@ class Snowball(commands.Cog):
             db = json.load(f)
 
         db[str(ctx.user.id)]["sb_thrown"] += 1
-        db[str(member.id)]["sb_got_thrown"] += 1
+        if member.bot is False:
+            db[str(member.id)]["sb_got_thrown"] += 1
         
         # Save it
         with open('db.json', 'w') as out:

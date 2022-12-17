@@ -1,4 +1,5 @@
 import discord
+import json
 from discord.ext import commands
 from discord.commands import Option
 
@@ -64,7 +65,14 @@ class About(commands.Cog, description="About commands."):
         embed.add_field(name="Joined this server at:", value=joined.strftime("%b-%d-%y %I:%M %p [UTC]"), inline=False)
         created = member.created_at # Month-Date-Year  Hour:Minute AM/PM
         embed.add_field(name="Account created at:", value=created.strftime("%b-%d-%y %I:%M %p [UTC]"), inline=False)
-
+        
+        with open('db.json') as f:
+            db = json.load(f)
+        
+        if member.bot is False:
+            embed.add_field(name='Snowballs thrown:', value=db[str(member.id)]['sb_thrown'], inline=True)
+            embed.add_field(name='Got thrown at:', value=db[str(member.id)]['sb_got_thrown'], inline=True)
+        
         embed.add_field(name="Is a bot?", value=str(member.bot) ,inline=False)
 
         await ctx.respond(embed=embed)
