@@ -36,7 +36,6 @@ class Snowball(commands.Cog):
 
         embed = discord.Embed(
             title = title,
-            #description = gif['data'][random.randint(0,24)]['url'],
             colour = discord.Colour.random()
         )
 
@@ -48,6 +47,16 @@ class Snowball(commands.Cog):
         with open('db.json') as f:
             db = json.load(f)
 
+        # Author
+        if str(ctx.author.id) not in db:
+            # Start keeping track of author's snowball throws
+            db[ctx.author.id] = {"name": ctx.author.name, "sb_thrown": 0, "sb_got_thrown": 0}
+
+            # Save it
+            with open('db.json', 'w') as out:
+                json.dump(db, out, indent=4)
+
+        # Member
         if str(member.id) not in db and member.bot is False:
             # Start keeping track of member's snowball throws
             db[member.id] = {"name": member.name, "sb_thrown": 0, "sb_got_thrown": 0}
