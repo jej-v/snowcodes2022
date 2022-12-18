@@ -11,7 +11,7 @@ class Gif(commands.Cog, description='Gif maker'):
         self.bot = bot
         self.footer = "Developed by jej#6495 for Snowcodes 2022 ❄️"
 
-    @commands.slash_command(guild_ids = [697938708174733454])
+    @commands.slash_command()
     async def yattagif(
         self,
         ctx: discord.ApplicationContext,
