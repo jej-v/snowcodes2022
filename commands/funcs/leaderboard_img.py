@@ -3,6 +3,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 def leaderboard_sort():
+    """
+    Sorts by the amount of snowballs thrown according to db.json,
+    Returns the first 10 results, as top10.
+    """
     with open('db.json') as f:
         db = json.load(f)
 
@@ -10,6 +14,10 @@ def leaderboard_sort():
     return top_10
 
 def final():
+    """
+    From leaderboard_sort(), we get a list of users to loop through and
+    pass it onto ImageDraw, to draw text onto the bg_1.png, a leaderboard template.
+    """
 
     bg = Image.open('assets/images/leaderboard/bg_1.png')
 

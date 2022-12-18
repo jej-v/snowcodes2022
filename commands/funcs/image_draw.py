@@ -3,18 +3,24 @@ import textwrap
 from PIL import Image, ImageDraw, ImageFont
 from urllib.request import urlopen, Request
 
-def snowglobe_img(url, username):
-    """
-    Adding the Discord User's profile picture onto the snow_globe.png picture.
+"""
+    All of the functions below work in the same way.
+
+    Function adds the Discord User's profile picture onto
+    the picture that was set as a background.
 
     Arguments:
-        url: the url leading directly to the User's profile picture
+        url: the url leading directly to the user's profile picture
         username: str, user's discord name
+        text: for the wishcard command, types the user's input
     
     Returns:
         Sends and saves the image created, can be overwritten locally if
         it's run more than one times.
-    """
+"""
+
+def snowglobe_img(url, username):
+
     im1 = Image.open('assets/images/snowglobe/snow_globe.png')
     im2 = Image.open(urlopen(Request(url, headers={'User-Agent': 'Mozilla'}))).resize(im1.size)
 
@@ -30,16 +36,7 @@ def snowglobe_img(url, username):
     final.save("assets/images/snowglobe/snow_globe_result.png")
 
 def senti(url):
-    """
-    Adding the Discord User's profile picture onto senti.png picture.
 
-    Arguments:
-        url: the url leading directly to the User's profile picture
-
-    Returns:
-        Sends and saves the image created, can be overwritten locally if
-        it's run more than one times.
-    """
     bg = Image.open('assets/images/yatta/senti.png')
     img = Image.open(urlopen(Request(url, headers={'User-Agent': 'Mozilla'}))).resize((170,170))
 

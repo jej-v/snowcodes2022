@@ -6,6 +6,10 @@ from discord.ext import commands
 from discord.commands import Option
 from urllib.request import urlopen, Request
 
+# List of commands here:
+# /anime <title>
+# /manga <title>
+
 class AnimeManga(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

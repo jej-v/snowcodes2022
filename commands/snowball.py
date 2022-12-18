@@ -6,6 +6,9 @@ from urllib.request import urlopen, Request
 from discord.ext import commands
 from discord.commands import Option
 
+# List of commands here:
+# /snowball
+
 class Snowball(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

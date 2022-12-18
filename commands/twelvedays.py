@@ -2,6 +2,9 @@ import discord
 import json
 from discord.ext import commands
 
+# List of commands here:
+# /twelvedays
+
 i = 1
 class TwDays(commands.Cog):
     # Buttons for twelvedays command

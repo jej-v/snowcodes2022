@@ -6,6 +6,13 @@ from discord.ext import commands
 from discord.commands import Option
 from datetime import date
 
+# List of commands here:
+# /advice
+# /bored
+# /choose
+# /countdown
+# /magic8ball
+
 class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-# deepfry it
+
 def fryImage(img):
     """
     Passes the image path, opens it with OpenCV and returns the image with drastic posterization

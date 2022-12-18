@@ -2,11 +2,14 @@ import discord
 from discord.ext import commands
 from urllib.request import urlopen, Request
 
+# List of commands here:
+# /inspiro
+
 class Inspiro(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-# Inspiro Button
+# Inspiro Reroll Button
     class inpsButton(discord.ui.View):
         @discord.ui.button(emoji='🤖', style=discord.ButtonStyle.primary)
 

@@ -4,6 +4,12 @@ from discord.commands import Option
 from commands.funcs.image_draw import snowglobe_img, senti, xmas_card
 from commands.funcs.deepfry import final
 
+# List of commands here:
+# /wishcard <text>
+# /snowglobe <member>
+# /yatta <member>
+# /deepfry <member> <attachment>
+
 class Image(commands.Cog, description="Image Commands"):
     def __init__(self, bot):
         self.bot = bot

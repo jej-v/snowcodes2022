@@ -4,11 +4,14 @@ from urllib.request import urlopen, Request
 from discord.ext import commands
 from discord.commands import Option
 
+# List of commands here:
+# /cat
+
 class Cat(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Cat Button
+    # Cat Reroll Button
     class catButton(discord.ui.View):
         @discord.ui.button(emoji='🐱', style=discord.ButtonStyle.primary)
         async def button_callback(self, button: discord.ui.Button, interaction: discord.Interaction):

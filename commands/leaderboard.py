@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 from commands.funcs.leaderboard_img import final
 
+# List of commands here:
+# /leaderboard
+
 class Leaderboard(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

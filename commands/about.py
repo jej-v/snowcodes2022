@@ -3,6 +3,11 @@ import json
 from discord.ext import commands
 from discord.commands import Option
 
+# List of commands here:
+# /aboutme
+# /info <member>
+# /help
+
 class About(commands.Cog, description="About commands."):
     
     def __init__(self, bot):
@@ -92,21 +97,25 @@ class About(commands.Cog, description="About commands."):
         embed.set_author(name = self.bot.user, icon_url=self.bot.user.avatar)
         embed.set_footer(text=self.footer)
 
+        embed.add_field(name="☃️ Xmas themed Commands", value='''
+    `/countdown` - How many days left till Xmas?
+    `/snowball` - Throw a snowball at someone.
+    `/wishcard` - Create a card with your wishes in it.
+    `/snowglobe` - Picture yourself in a Snowglobe!
+    `/twelvedays` - The Twelve Computerized Days of Christmas.''', inline=False)
+
         embed.add_field(name="🗿 Standard Commands", value='''
     `/help` - This message.
     `/aboutme` - Information about me!
     `/info` - Shows member information.
     `/leaderboard` - Shows the leaderboard of the most snowballs thrown.''', inline=False)
 
-        embed.add_field(name='🖼️ Image Commands', value='''
-    `/snowglobe` - Picture yourself inside a snowglobe!
-    `/yatta` - Get Yatta'd by the great Herrscher of Sentience.
+        embed.add_field(name='🖼️ Image/Gif Commands', value='''
     `/deepfry` - Deepfries an image or a member.
-    `/wishcard` - Create a card with your wishes in it!
+    `/yatta` - Get Yatta'd by the great Herrscher of Sentience.
+    `/yattagif` - Get Yatta'd live by the great Herrscher of Sentience.
     ''')
         embed.add_field(name="✨ Fun Commands", value='''
-    `/snowball` - Throw a snowball at someone!
-    `/countdown` - How many days left till Xmas?
     `/cat` - cat.
     `/advice` - Have a random slip of advice~
     `/bored` - Bored? This may help~
