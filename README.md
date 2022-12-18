@@ -5,7 +5,7 @@ jej-mas is a general purpose bot, features a variety of fun and interactive comm
 
 ## List of Commands
 
-![image](https://user-images.githubusercontent.com/64602039/208215651-9c42683c-c5a6-48de-8a88-2532d5b0e107.png)
+![image](https://user-images.githubusercontent.com/64602039/208318957-7a0bd77a-e718-4338-b26e-6e66a9dc9f1e.png)
 
 # List of APIs used:
 
