@@ -23,5 +23,4 @@ def yatta_gif(url):
             frame = frame.copy()
             frames.append(frame)
     
-    print(len(frames))
     frames[0].save('assets/images/yatta/result.gif', save_all=True, append_images=frames[1:], duration=30, loop=0)

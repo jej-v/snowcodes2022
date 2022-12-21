@@ -11,7 +11,7 @@ class Gif(commands.Cog, description='Gif maker'):
         self.bot = bot
         self.footer = "Developed by jej#6495 for Snowcodes 2022 ❄️"
 
-    @commands.slash_command(guild_ids = [697938708174733454])
+    @commands.slash_command()
     async def yattagif(
         self,
         ctx: discord.ApplicationContext,
@@ -34,7 +34,6 @@ class Gif(commands.Cog, description='Gif maker'):
         file = discord.File("assets/images/yatta/result.gif", filename="result.gif")
 
         embed.set_image(url="attachment://result.gif")
-        embed.set_thumbnail(url="https://img-os-static.hoyolab.com/communityWeb/upload/558a79d377063b7e0aec34cc65b9df87.png")
         embed.set_footer(text=self.footer)
         
         await ctx.edit(content=None, file=file, embed=embed)
