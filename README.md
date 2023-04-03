@@ -84,6 +84,8 @@ In case you have `pycord` installed by chance:
 $ python3 -m pip uninstall pycord
 ```
 
+# Results
+Got 2nd place brrrrrrrr
 
-# Sides Notes
+# Side Notes
 There are quite a few Honkai Impact 3rd references, such as the `/yatta` command and Honkai stickers from Hoyoblab set as thumbnails in some of the commands. Even the profile picture itself! Personally, I think they were a nice addition, lol.
